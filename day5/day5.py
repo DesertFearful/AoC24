@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+
 def preprocess(file_name):
     data, rules = [], defaultdict(list)
     with open(file_name, 'r') as file:
@@ -54,6 +55,7 @@ def p2_sol(data, rules):
                 check = check_row(data[i], rules)
             res += data[i][len(data[i])//2]
     return res
+
 
 if __name__ == '__main__':
     data, rules = preprocess('day5/input.txt')

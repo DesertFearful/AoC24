@@ -10,6 +10,7 @@ def preprocess(file_name):
             map.append(row)
     return map, x, y
 
+
 def p1_sol(map, x, y):
     n, m = len(map), len(map[0])
     i, j = x, y
