@@ -52,7 +52,6 @@ def p1_sol(map, x, y):
             else:
                 move = '^'
             if j == 0 and move == '<': return count
-    return count
 
 
 def check_cycle(map, x, y):
@@ -103,14 +102,14 @@ def p2_sol(map, x, y):
     res = 0
     for i in range(len(map)):
         for j in range(len(map[i])):
-            if map[i][j] == 'x':
+            if map[i][j] == 'x' and (i,j) != (x,y):
                 map[i][j] = '#'
                 res += 1 if check_cycle(map, x, y) else 0
                 map[i][j] = 'x'
     return res
 
 
-
-map_, x, y = preprocess('day6/input.txt')
-p1_sol(map_, x, y)
-print(p2_sol(map_, x, y))
+if __name__ == '__main__':
+    data, x, y = preprocess('day6/input.txt')
+    print(p1_sol(data, x, y))
+    print(p2_sol(data, x, y))
