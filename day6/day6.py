@@ -55,7 +55,62 @@ def p1_sol(map, x, y):
     return count
 
 
+def check_cycle(map, x, y):
+    n, m = len(map), len(map[0])
+    i, j = x, y
+    move = '^'
+    seen = set()
+    while True:
+        while move == '^':
+            if map[i-1][j] != '#':
+                i -= 1
+            elif (pair := (i, j, move)) in seen:
+                return True
+            else:
+                seen.add(pair)
+                move = '>'
+            if i == 0 and move == '^': return False
+        while move == '>':
+            if map[i][j+1] != '#':
+                j += 1
+            elif (pair := (i, j, move)) in seen:
+                return True
+            else:
+                seen.add(pair)
+                move = 'v'
+            if j == m-1 and move == '>': return False
+        while move == 'v':
+            if map[i+1][j] != '#':
+                i += 1
+            elif (pair := (i, j, move)) in seen:
+                return True
+            else:
+                seen.add(pair)
+                move = '<'
+            if i == n-1 and move == 'v': return False
+        while move == '<':
+            if map[i][j-1] != '#':
+                j -= 1
+            elif (pair := (i, j, move)) in seen:
+                return True
+            else:
+                seen.add(pair)
+                move = '^'
+            if j == 0 and move == '<': return False
 
-map_, x, y = preprocess('input.txt')
-print(map_, x, y)
-print(p1_sol(map_, x, y))
+
+def p2_sol(map, x, y):
+    res = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 'x':
+                map[i][j] = '#'
+                res += 1 if check_cycle(map, x, y) else 0
+                map[i][j] = 'x'
+    return res
+
+
+
+map_, x, y = preprocess('day6/input.txt')
+p1_sol(map_, x, y)
+print(p2_sol(map_, x, y))
