@@ -54,7 +54,6 @@ def p1_sol(data, starts):
 
 def rating(start, graph, grid):
     res = 0
-    visited = set()
     stack = [start]
 
     while stack:
